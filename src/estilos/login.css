@@ -1,0 +1,49 @@
+ .rowClase
+{
+    margin-left: 30%!important ;
+    margin-right: 22%!important;
+    margin-bottom: 20px;
+   margin-top: 20%!important;
+}
+
+ 
+
+
+.boton
+{
+    margin: 11% 40%;
+}
+
+
+@media only screen and (max-width: 530px){
+
+     .rowClase
+    {
+        margin-left: auto!important;
+    margin-right: auto!important;
+    margin-bottom: 20px!important;
+    margin-top:25%!important;
+}
+        
+    
+
+}
+
+@media only screen and (max-width: 300px){
+
+ 
+ .boton
+{
+    margin: 11% 25%;
+}
+
+ .rowClase
+
+{
+    margin-left: auto!important;
+    margin-right: auto!important;
+    margin-bottom: 20px!important;
+    margin:40% 0% 0% 0%!important
+}
+
+}

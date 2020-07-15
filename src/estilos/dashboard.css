@@ -1,0 +1,26 @@
+ .columna
+{
+    margin-top: 20%;
+}
+
+ .react-calendar    
+{
+ margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width:770px)
+{
+      .columna
+{
+    margin-top: 20%;
+}
+}
+
+@media only screen and (min-width:770px)
+{
+     .columna
+{
+    margin-top: 10%;
+}
+}

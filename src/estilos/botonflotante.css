@@ -1,0 +1,8 @@
+
+.btnFlotante{
+
+    bottom: 8px;
+    right: 8px;
+    position: absolute;
+    height: 25px;
+}
