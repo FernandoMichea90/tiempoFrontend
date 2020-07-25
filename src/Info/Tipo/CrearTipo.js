@@ -3,7 +3,7 @@ import {TextInput} from 'react-materialize';
 import BotonFlotante from '../../componentes/BotonFlotante'
 import BarraLateral from '../../componentes/BarraLateral'
 import Swal from 'sweetalert2'
-
+import clienteAxios from '../../config/axios'
 
 import useValidacion from '../../Hooks/useValidacionesTipo'
 import validar from '../../Validacion/validarCrearTipo';
@@ -22,7 +22,8 @@ function CrearTipo(props)
 const GuardarTipo=e=>
 {
     e.preventDefault()
-    console.log("Creando Tipo");
+    
+   //clienteAxios.post('/creartipo',)
 
     Swal.fire(
         'Exito','Se ha guardado el registro','success'

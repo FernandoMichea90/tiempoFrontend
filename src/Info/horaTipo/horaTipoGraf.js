@@ -5,7 +5,7 @@ import moment from 'moment'
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 var CanvasJS = CanvasJSReact.CanvasJS;
 
-function BarChart (props) {
+function BarChart ({tipos}) {
 	
 
 	
@@ -36,17 +36,40 @@ function BarChart (props) {
 		
 	
 	useEffect(() => {
-		
-		
-		
-		if(moment(props.fecha.fecha).format('LL')===moment(new Date()).format('LL'))
+
+			var arre=[];
+
+
+		if(tipos.length)
 		{
-			guardar(dataPointsuno)
+
+      for(var i=0;i<tipos.length;i++)
+        {
+          console.log(tipos[i]._id[0].tipo);
+          console.log(tipos[i].totalHoras);
+          var prueba={
+            label:tipos[i]._id[0].tipo,
+            y:tipos[i].totalHoras
+          }
+          //console.log(prueba);
+          arre.push(prueba)
+          
+        }
+		guardar(arre)
+        //arre=[{tipo:'sueño',tiempo:'8:00'},{tipo:'fitness',tiempo:'1:00'},{tipo:'Hotel',tiempo:'2:00'}]
+
+
 		}else{
-			guardar(dataPointsdos)
-		}
+
+			guardar(arre);
+
+		
+    }
+		
+		
+		
 	
-	}, [props.fecha])
+	}, [tipos])
 	
 
 

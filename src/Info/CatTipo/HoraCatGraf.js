@@ -3,7 +3,7 @@ import CanvasJSReact from '../../canvasjs-2.3.2/canvasjs.react';
 import moment from 'moment'
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
  
-function ColumnChart (props) {
+function ColumnChart ({categorias}) {
 	
 		//constante de los puntos a interceder 
 
@@ -29,7 +29,7 @@ function ColumnChart (props) {
 
 		const options = {
 			title: {
-				text: "Basic Column Chart"
+				text: "Categoria Tiempo"
 			},
 			animationEnabled: true,
 			data: [
@@ -42,15 +42,36 @@ function ColumnChart (props) {
 		}
 		
 		useEffect(() => {
-
-		if(moment(props.fecha.fecha).format('LL')===moment(new Date()).format('LL'))
-		{
-			guardarPuntos(puntosUno)
-		}else{
-			guardarPuntos(puntosDos)
+			var arre=[]
+	
+			if(categorias.length)
+			{
+	
+		  for(var i=0;i<categorias.length;i++)
+			{
+			  console.log(categorias[i]._id);
+			  console.log(categorias[i].totalHoras);
+			  var prueba={
+				label:categorias[i]._id,
+				y:categorias[i].totalHoras
+			  }
+			  //console.log(prueba);
+			  arre.push(prueba)
+			  
+			}
+			guardarPuntos(arre)
+		  
+			//arre=[{tipo:'sueño',tiempo:'8:00'},{tipo:'fitness',tiempo:'1:00'},{tipo:'Hotel',tiempo:'2:00'}]
+	
+	
+			}else{
+	
+		  //arre=[{tipo:'Urgente Importante',tiempo:'3:00'},{tipo:'Urgente No Importante',tiempo:'4:00'},{tipo:'No Urgente Importante',tiempo:'5:00'}]
+		  guardarPuntos(arre)
+		  
 		}
 		
-		}, [props.fecha])
+		}, [categorias])
 
 
 		return (

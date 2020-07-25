@@ -1,4 +1,4 @@
-import React ,{Fragment,useEffect,useState}from 'react'
+import React ,{Fragment,useEffect,useState, useContext}from 'react'
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
 import BotonFlotante from '../../componentes/BotonFlotante'
@@ -7,8 +7,9 @@ import editIcono from '../../iconos/editar.png'
 import deleteIcono from '../../iconos/basurero.png'
 import Swal from 'sweetalert2'
 import moment from 'moment'
-
+import clienteAxios from '../../config/axios'
 import { Link } from 'react-router-dom';
+import { CRMContext } from '../../context/CRMcontext';
 
 
 
@@ -18,6 +19,8 @@ function ListarRegistro()
     fecha:new Date()})
 
   const [cols,guardarRegistros]=useState([])
+
+   const [auth,guardarToken]=useContext(CRMContext)
 
  const eliminarRegistro=()=>
  {
@@ -50,9 +53,23 @@ function ListarRegistro()
 
   useEffect(() => {
   
+    // hacer la consulta a la base de datos 
+
+const   consultaApi=async ()=>
+{
+
+
+  const  listarConsulta = await  clienteAxios.post(`/fecharegistros`,{auth,fecha})
+  guardarRegistros(listarConsulta.data);
+
+}
+   
+
+consultaApi();
+
 
       // Variables para hacer una lista 
-
+/*
  let columna=[
   {
    inicio:moment().format('LT'),fin:moment().format('LT'),descripcion:'Dormir' ,tipo:'Sueño',categoria:'urgente importante'
@@ -84,17 +101,17 @@ function ListarRegistro()
         {
          
           
-          console.log("es igual ");
+      
           
           guardarRegistros(columna)
         }else
         {
-          console.log("es diferente");
+          
           
           guardarRegistros(columnaDos)
         }
 
-
+*/
         // aca va la consulta 
        
        
@@ -170,7 +187,7 @@ function ListarRegistro()
 <tr>
 <td>{tiempo.inicio}</td>
 <td>{tiempo.fin}</td>
-<td>{tiempo.tipo}</td>
+<td>{tiempo.tipoDetalles[0].tipo}</td>
 <td>{tiempo.categoria}</td>
 <td>
 <button onClick={()=>verDescripcion(tiempo.descripcion)}>

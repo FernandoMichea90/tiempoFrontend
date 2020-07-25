@@ -3,9 +3,13 @@ import {TextInput} from 'react-materialize';
 
 import useValidacion from '../../Hooks/useValidacionEditarTipo'
 import validar from '../../Validacion/validarEditarTipo'
-
-function EditarTipo()
+import clienteAxios from '../../config/axios'
+import Swal from 'sweetalert2';
+function EditarTipo(props)
 {
+    
+    //Obtengo el id del tipo a editar
+    const {id}=props.match.params;
 
 
     const [tipo,guardarTipo]=useState({});
@@ -20,10 +24,66 @@ function EditarTipo()
 
 
 
+    const EditarTipoFuncion=()=>
+    {
+        //e.preventDefault();
+        console.log("eDitando Funcion ....");
+        console.log(tipo);
+       
+        clienteAxios.put(`/actualizartipo/${tipo._id}`,tipo)
+        .then(res => {
+            // validar si hay errores de mongo 
+            if(res.data.code === 11000) {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Hubo un error',
+                    text: 'No se pudo actualizar el registro'
+                })
+            } else {
+                Swal.fire(
+                    'Correcto',
+                    'Se actualizó Correctamente',
+                    'success'
+                )
+            }
+
+            // redireccionar
+            props.history.push('/tipo');
+        })
+
+
+        
+
+        
+
+    }
+
+
+
     useEffect(() => {
+
+        console.log("paso por aca"+id);
+        
        
 
         //consulta a la bd para para agregar el state
+
+
+        const retornarRegistro=async()=>
+        {
+           
+                const consulta =await clienteAxios.get(`/mostrartipo/${id}`);
+              //  console.log(consulta);
+                guardarTipo(consulta.data)
+
+
+
+
+             
+
+        }
+        retornarRegistro();
+        
         var types=({
             
             tipo:'Sueño',color:'#b30fae'
@@ -38,7 +98,7 @@ function EditarTipo()
 
 
 
-const {handleSubmit,errores}=useValidacion(tipo,validar)
+const {handleSubmit,errores}=useValidacion(tipo,validar,EditarTipoFuncion)
 
 return(
 

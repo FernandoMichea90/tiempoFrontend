@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import moment from 'moment'
 
-function HoraTipo({fecha})
+function HoraTipo({tipos})
 {
  
 
@@ -16,7 +16,9 @@ function HoraTipo({fecha})
   useEffect(() => {
     
 
-    var arre=""
+    var arre=[]
+
+    /*
     if(moment(fecha.fecha).format('LL')===moment(new Date()).format('LL'))
 		{
        arre=[{tipo:'fitness',tiempo:'1:00'},{tipo:'Hotel',tiempo:'2:00'}]
@@ -24,10 +26,39 @@ function HoraTipo({fecha})
 		}else{
         arre=[{tipo:'sueño',tiempo:'8:00'},{tipo:'fitness',tiempo:'1:00'},{tipo:'Hotel',tiempo:'2:00'}]
 
-		}
+    }
+    */
+    if(tipos.length)
+		{
+
+      for(var i=0;i<tipos.length;i++)
+        {
+          console.log(tipos[i]._id[0].tipo);
+          console.log(tipos[i].totalHoras);
+          var prueba={
+            tipo:tipos[i]._id[0].tipo,
+            tiempo:tipos[i].totalHoras
+          }
+          //console.log(prueba);
+          arre.push(prueba)
+          
+        }
+      
+        //arre=[{tipo:'sueño',tiempo:'8:00'},{tipo:'fitness',tiempo:'1:00'},{tipo:'Hotel',tiempo:'2:00'}]
+
+
+		}else{
+
+      arre=[{tipo:'fitness',tiempo:'1:00'},{tipo:'Hotel',tiempo:'2:00'}]
+
+      
+    }
+    
+
+
     guardarArreglo(arre)
 
-  }, [fecha.fecha])
+  }, [tipos])
 
 
 

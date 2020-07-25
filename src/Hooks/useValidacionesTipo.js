@@ -1,18 +1,25 @@
-import { useState,useEffect } from 'react'
+import { useState,useEffect,useContext } from 'react'
 import Swal from 'sweetalert2'
-
-
+import clienteAxios from '../config/axios'
+import {CRMContext} from '../context/CRMcontext'
 
 const  useValidacionEditar=(StateInicial,validar,fn)=>
 {
-    console.log("...dentro");
-    
+const [auth,guardarAuth]=useContext(CRMContext);   
 const [valores,guardarValores]=useState(StateInicial)
 const [errores,guardarErrores]=useState({})
 const [submitForm,guardarSubmit]=useState(false)
 
 useEffect(() => {
   
+
+    console.log("muestrame el auth");
+    console.log(auth);
+    
+
+
+
+
     if(submitForm)
     {
 
@@ -20,8 +27,16 @@ useEffect(() => {
 
         if(validarError)
         {
+            clienteAxios.post('/creartipo',{valores,auth}).then(res=>{
 
-            Swal.fire('Exito','El registro ha sido ingresado','success')
+                    if(res.data.code===11000)
+                    {
+                        Swal.fire('Exito','El registro ha sido ingresado','success')
+                    }
+
+
+
+            })
 
         }else
         {

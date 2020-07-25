@@ -1,13 +1,11 @@
-import {useState, useEffect} from 'react'
-
-import Swal from 'sweetalert2'
-
-const ValidarEditarTipo=(StateInicial,validar)=>
+import {useState, useEffect} from 'react';
+import Swal from 'sweetalert2';
+const ValidarEditarTipo=(StateInicial,validar,fn)=>
 {
 
 
 
-  //const[valores,guardarValores]=useState(StateInicial);
+  const[valores,guardarValores]=useState (StateInicial);
   const[errores,guardarErrores]=useState({});
   const[submit,guardarSubmit]=useState(false)
 
@@ -23,7 +21,10 @@ const ValidarEditarTipo=(StateInicial,validar)=>
         
         if(noErrores)
         {
-          Swal.fire("Exito","La edicion ha sido exitosa","success")
+         
+
+          Swal.fire("Exito","La edicion ha sido exitosa","success");
+          fn()
 
         }else
         {
