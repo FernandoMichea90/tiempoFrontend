@@ -14,6 +14,8 @@ import TipoPrincipal from './Info/Tipo/TipoPrincipal';
 import EditarTipo from './Info/Tipo/EditarTipo';
 
 function App() {
+  console.log("ruta");
+  
   console.log(process.env.REACT_APP_BACKEND_URL);
 
   const [auth,guardarAuth]=useContext(CRMContext);
